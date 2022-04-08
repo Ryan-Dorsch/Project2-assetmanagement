@@ -1,4 +1,4 @@
-package com.revature.pms.bean;
+package com.revature.pms.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

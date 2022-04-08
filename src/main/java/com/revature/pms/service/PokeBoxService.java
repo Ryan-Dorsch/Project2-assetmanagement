@@ -1,7 +1,8 @@
 package com.revature.pms.service;
 
 import java.util.List;
-import com.revature.pms.bean.PokeBox;
+
+import com.revature.pms.model.PokeBox;
 
 
 public interface PokeBoxService {

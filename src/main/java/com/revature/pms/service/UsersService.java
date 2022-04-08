@@ -2,7 +2,7 @@ package com.revature.pms.service;
 
 import java.util.List;
 
-import com.revature.pms.bean.Users; 
+import com.revature.pms.model.Users; 
 
 public interface UsersService {
 

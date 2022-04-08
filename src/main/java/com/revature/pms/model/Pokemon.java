@@ -1,4 +1,4 @@
-package com.revature.pms.bean;
+package com.revature.pms.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,25 +12,27 @@ import javax.persistence.Table;
 public class Pokemon {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "pokid")
 	private Integer id;
-	@Column(name="pokname")
+	@Column(name="name")
 	private String name;
-	@Column(name="pokheight")
+	@Column(name="height")
 	private Integer height;
 	@Column(name="weight")
 	private Integer weight;
-	@Column(name="pokdescription")
+	@Column(name="description")
 	private String description;
-	@Column(name="pokcatchrate")
+	@Column(name="catch_rate")
 	private Integer catchRate;
-	@Column (name="poksprite")
+	@Column (name="sprite")
 	private String sprite;
-	@Column (name="poktype1")
+	@Column (name="type_1")
 	private String type1;
-	@Column (name="poktype2")
+	@Column (name="type_2")
 	private String type2;
 	
+	public Pokemon() {
+		
+	}
 	public Integer getId() {
 		return id;
 	}

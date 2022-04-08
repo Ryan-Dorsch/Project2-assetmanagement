@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.revature.pms.bean.PokeBox;
+import com.revature.pms.model.PokeBox;
 import com.revature.pms.service.PokeBoxService;
 
 @Controller

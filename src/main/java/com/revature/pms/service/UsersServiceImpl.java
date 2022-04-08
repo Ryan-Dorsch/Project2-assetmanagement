@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.revature.pms.model.Users;
 import com.revature.pms.repo.UsersRepository;
-import com.revature.pms.bean.Users;
 
 
 @Service("usersService")

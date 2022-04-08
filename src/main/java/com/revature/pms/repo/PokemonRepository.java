@@ -1,17 +1,15 @@
 package com.revature.pms.repo;
 
 import java.util.List;
+import java.util.Optional;
 
-import com.revature.pms.bean.Pokemon;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+import com.revature.pms.model.Pokemon;
 
-public interface PokemonRepository {
+@Repository
+public interface PokemonRepository extends JpaRepository<Pokemon, Integer>{
 	
-	public void addPokemon(Pokemon pokemon);
-
-	public List<Pokemon> listPokemon();
-	
-	public Pokemon getPokemon(int pokid);
-	
-	public void deletePokemon(Pokemon pokemon); 
+	Optional<Pokemon> findById(Integer id);
 }

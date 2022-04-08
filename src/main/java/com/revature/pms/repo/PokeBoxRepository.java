@@ -2,7 +2,7 @@ package com.revature.pms.repo;
 
 import java.util.List;
 
-import com.revature.pms.bean.PokeBox;
+import com.revature.pms.model.PokeBox;
 
 
 public interface PokeBoxRepository {
