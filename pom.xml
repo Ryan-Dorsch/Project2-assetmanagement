@@ -53,14 +53,32 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
+	  <plugins>
+	    <plugin>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-maven-plugin</artifactId>
+	    </plugin>
+	    <plugin>
+	      <artifactId>maven-resources-plugin</artifactId>
+	      <executions>
+	        <execution>
+	          <id>copy-resources</id>
+	          <phase>validate</phase>
+	          <goals>
+	            <goal>copy-resources</goal>
+	          </goals>
+	          <configuration>
+	            <outputDirectory>${basedir}/target/classes/static/</outputDirectory>
+	            <resources>
+	              <resource>
+	                <directory>${basedir}/pms-client/static</directory>
+	              </resource>
+	            </resources>
+	          </configuration>
+	        </execution>
+	      </executions>
+	    </plugin>
+	  </plugins>
 	</build>
-
 </project>
