@@ -6,7 +6,7 @@ target/
 
 
 ### to ignore the application.properties file ###
-.properties
+*.properties
 
 
 ### STS ###
