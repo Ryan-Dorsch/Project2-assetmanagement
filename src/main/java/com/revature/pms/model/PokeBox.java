@@ -14,8 +14,9 @@ public class PokeBox {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "boxnumber")
 	private Integer boxNumber;
-	@Column(name="tableid")
+	@Column(name="id")
 	private Integer tableId;
+	
 	
 	
 	public Integer getBoxNumber() {
@@ -30,4 +31,8 @@ public class PokeBox {
 	public void setTableId(Integer tableId) {
 		this.tableId = tableId;
 	}
+	public PokeBox() {
+		
+	}
+	
 }

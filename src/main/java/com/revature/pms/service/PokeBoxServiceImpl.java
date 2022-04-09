@@ -16,13 +16,13 @@ public class PokeBoxServiceImpl implements PokeBoxService {
 	}
 
 	@Override
-	public List<PokeBox> listPokeBoxss() {
+	public List<PokeBox> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public PokeBox getPokeBox(int boxNumber) {
+	public PokeBox findById(Integer boxNumber) {
 		// TODO Auto-generated method stub
 		return null;
 	}

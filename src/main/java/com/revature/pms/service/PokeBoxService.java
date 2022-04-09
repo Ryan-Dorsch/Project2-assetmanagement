@@ -9,9 +9,9 @@ public interface PokeBoxService {
 	
 	public void addPokeBox(PokeBox pokeBox);
 
-	public List<PokeBox> listPokeBoxss();
+	public List<PokeBox> findAll();
 	
-	public PokeBox getPokeBox(int boxNumber);
+	public PokeBox findById(Integer boxNumber);
 	
 	public void deletePokeBox(PokeBox pokeBox);
 }
