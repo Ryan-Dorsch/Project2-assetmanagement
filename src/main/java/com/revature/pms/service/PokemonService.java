@@ -3,6 +3,7 @@ package com.revature.pms.service;
 import java.util.List;
 
 import com.revature.pms.model.Pokemon;
+import com.revature.pms.model.PokemonData;
 
 public interface PokemonService {
 	

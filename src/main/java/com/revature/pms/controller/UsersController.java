@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.pms.model.Users;
-import com.revature.pms.service.UsersService;
+import com.revature.pms.model.User;
+import com.revature.pms.service.UserService;
 
 @RestController
 @RequestMapping("/api/users")
@@ -22,22 +22,22 @@ import com.revature.pms.service.UsersService;
 public class UsersController{
 
 	@Autowired
-	UsersService usersService;
+	UserService usersService;
 
 	@GetMapping
-	public List<Users> findAll() {
+	public List<User> findAll() {
 		// TODO Auto-generated method stub
 		return usersService.findAll();
 	}
 
 	@GetMapping("/{id}")
-	public Users findById(@PathVariable int id) {
+	public User findById(@PathVariable int id) {
 		// TODO Auto-generated method stub
 		return usersService.findById(id);
 	}
 
 	@PostMapping
-	public void addUsers(@RequestBody Users users) {
+	public void addUsers(@RequestBody User users) {
 		// TODO Auto-generated method stub
 		usersService.addUsers(users);
 	}

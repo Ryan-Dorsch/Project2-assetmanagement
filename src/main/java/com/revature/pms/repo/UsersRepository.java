@@ -4,10 +4,10 @@ package com.revature.pms.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.revature.pms.model.Users;
+import com.revature.pms.model.User;
 
 
-public interface UsersRepository extends JpaRepository<Users, Integer> {
+public interface UsersRepository extends JpaRepository<User, Integer> {
 }
 
 	

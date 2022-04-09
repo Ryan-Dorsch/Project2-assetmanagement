@@ -1,51 +1,43 @@
 package com.revature.pms.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Pokemon")
+@Table(name="pokemon")
 public class Pokemon {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	@Column(name="name")
-	private String name;
-	@Column(name="height")
-	private Integer height;
-	@Column(name="weight")
-	private Integer weight;
-	@Column(name="description")
-	private String description;
-	@Column(name="catch_rate")
-	private Integer catchRate;
-	@Column (name="sprite")
-	private String sprite;
-	@Column (name="type_1")
-	private String type1;
-	@Column (name="type_2")
-	private String type2;
+	private String nickname;
+	private Integer location;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "pokemondata_id", nullable = false)
+    private PokemonData pokemonData;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+	private User user;
 	
 	public Pokemon() {
 		
 	}
 	
-	public Pokemon(String name, Integer height, Integer weight, String description, Integer catchRate, String sprite,
-			String type1, String type2) {
+	
+	public Pokemon(String nickname, Integer location, User user, PokemonData pokemonData) {
 		super();
-		this.name = name;
-		this.height = height;
-		this.weight = weight;
-		this.description = description;
-		this.catchRate = catchRate;
-		this.sprite = sprite;
-		this.type1 = type1;
-		this.type2 = type2;
+		this.nickname = nickname;
+		this.location = location;
+		this.user = user;
+		this.pokemonData = pokemonData;
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -53,53 +45,34 @@ public class Pokemon {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getNickname() {
+		return nickname;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
-	public Integer getHeight() {
-		return height;
+	public Integer getLocation() {
+		return location;
 	}
-	public void setHeight(Integer height) {
-		this.height = height;
+	public void setLocation(Integer location) {
+		this.location = location;
 	}
-	public Integer getWeight() {
-		return weight;
+	public PokemonData getPokemonData() {
+		return pokemonData;
 	}
-	public void setWeight(Integer weight) {
-		this.weight = weight;
+	public void setPokemonData(PokemonData pokemonData) {
+		this.pokemonData = pokemonData;
 	}
-	public String getDescription() {
-		return description;
+
+
+	public User getUser() {
+		return user;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public Integer getCatchRate() {
-		return catchRate;
-	}
-	public void setCatchRate(Integer catchRate) {
-		this.catchRate = catchRate;
-	}
-	public String getSprite() {
-		return sprite;
-	}
-	public void setSprite(String sprite) {
-		this.sprite = sprite;
-	}
-	public String getType1() {
-		return type1;
-	}
-	public void setType1(String type1) {
-		this.type1 = type1;
-	}
-	public String getType2() {
-		return type2;
-	}
-	public void setType2(String type2) {
-		this.type2 = type2;
-	}
+	
 	
 }

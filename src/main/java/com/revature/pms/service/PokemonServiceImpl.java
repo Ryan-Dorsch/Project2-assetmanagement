@@ -8,12 +8,17 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.pms.model.Pokemon;
+import com.revature.pms.model.PokemonData;
+import com.revature.pms.repo.PokemonDataRepository;
 import com.revature.pms.repo.PokemonRepository;
 
 @Service("pokemonService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class PokemonServiceImpl implements PokemonService {
 
+	@Autowired
+	PokemonDataRepository pokemonDataRepository;
+	
 	@Autowired
 	PokemonRepository pokemonRepository;
 

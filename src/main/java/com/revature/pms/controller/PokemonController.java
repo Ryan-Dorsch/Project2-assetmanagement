@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.revature.pms.service.PokemonService;
 import com.revature.pms.model.Pokemon;
+import com.revature.pms.model.PokemonData;
 
 @RestController
 @RequestMapping("/api/pokemon")

@@ -16,15 +16,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.revature.pms.model.Pokemon;
-import com.revature.pms.repo.PokemonRepository;
+import com.revature.pms.model.PokemonData;
+import com.revature.pms.repo.PokemonDataRepository;
 
 
 @Component
 public class PokemonDataLoader implements CommandLineRunner {
 	
 	@Autowired
-	PokemonRepository pokemonRepository;
+	PokemonDataRepository pokemonRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -50,7 +50,7 @@ public class PokemonDataLoader implements CommandLineRunner {
 		String spriteUrl;
 		String description = "Not found :(";
 		Integer catchRate;
-		Pokemon p = new Pokemon();
+		PokemonData p = new PokemonData();
 		for (int i = 1; i < 152; i++) {
 			ResponseEntity<String> pokemon = restTemplate.exchange(pokemonUrl, HttpMethod.GET, entity, String.class, i);
 			ResponseEntity<String> speciesJson = restTemplate.exchange(speciesUrl, HttpMethod.GET, entity, String.class, i);
@@ -94,7 +94,7 @@ public class PokemonDataLoader implements CommandLineRunner {
 //			System.out.println("id: " + i + " name: " + name + " height: " + height + " weight: " + weight + " type1: " + type1 + " type2: " + type2 +
 //					" catch_rate: " + catchRate +"\n\t" + "spriteUrl: " + spriteUrl + "\n\t" + "description:\n" + "\t\t"+ description + "\n\t" + "Version Index: " + versionIndex); 
 //			}
-			p = new Pokemon(name, height, weight, description, catchRate, spriteUrl, type1, type2);
+			p = new PokemonData(name, height, weight, description, catchRate, spriteUrl, type1, type2);
 			pokemonRepository.save(p);
 		}
 		//System.out.println("**************************************************************************************************************");

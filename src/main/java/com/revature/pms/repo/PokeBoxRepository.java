@@ -2,16 +2,13 @@ package com.revature.pms.repo;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.revature.pms.model.PokeBox;
+import com.revature.pms.model.User;
 
 
-public interface PokeBoxRepository {
+public interface PokeBoxRepository extends JpaRepository<PokeBox, Integer> {
 	
-	public void addPokeBox(PokeBox pokeBox);
-
-	public List<PokeBox> listPokeBox();
-	
-	public PokeBox getPokeBox(int BoxNumber);
-	
-	public void deletePokemon(PokeBox pokeBox); 
+	public List<PokeBox> findByUserId(Integer userId);
 }

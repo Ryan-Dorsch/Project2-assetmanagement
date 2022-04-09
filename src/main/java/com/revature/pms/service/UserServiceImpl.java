@@ -6,35 +6,35 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.pms.model.Users;
+import com.revature.pms.model.User;
 import com.revature.pms.repo.UsersRepository;
 
 @Service
-public class UsersServiceImpl implements UsersService {
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UsersRepository usersRepository;
 
 	@Override
-	public List<Users> findAll() {
+	public List<User> findAll() {
 		// TODO Auto-generated method stub
 		return usersRepository.findAll();
 	}
 
 	@Override
-	public Users findById(int id) {
+	public User findById(int id) {
 		// TODO Auto-generated method stub
 		return usersRepository.findById(id).get();
 	}
 
 	@Override
-	public void addUsers(Users users) {
+	public void addUsers(User users) {
 		// TODO Auto-generated method stub
 		usersRepository.save(users);
 	}
 
 	@Override
-	public void updateUsers(int id, Users users) {
+	public void updateUsers(int id, User users) {
 		// TODO Auto-generated method stub
 		usersRepository.save(users);
 	}
