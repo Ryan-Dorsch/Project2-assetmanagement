@@ -5,9 +5,8 @@ target/
 !**/src/test/**/target/
 
 
-### to ignore the application.properties file ###
+### ignore the app.prop###
 *.properties
-
 
 ### STS ###
 .apt_generated
