@@ -1,0 +1,26 @@
+<header >
+  <nav class="top-0 shadow-md fixed w-full z-50">
+    <div class='w-full'>
+      <div class='flex items-center h-16'>
+          <div class="flex items items-center mx-20 justify-between w-full h-20">
+              <div [routerLink]="'/'" class='flex justify-center items-center flex-shrink-0 font-semibold  text-3xl cursor-pointer' >
+                  <h1 class='italic pr-1'>
+                    Poké
+                  </h1>
+                  <span class="bg-red-600 text-white rounded-md pl-1.5 pr-1.5 "> hub </span>
+              </div>
+              <div>
+                <div class="ml-10 flex items-baseline space-x-4">
+                  <a routerLink="/login" class="text-gray-500 hover:text-gray-600 cursor-pointer font-bold py-2 px-4 ">
+                    Login
+                  </a>
+                  <button routerLink="/signup" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    Sign up
+                  </button>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </nav>
+</header>
