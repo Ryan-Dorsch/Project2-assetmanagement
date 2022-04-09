@@ -31,7 +31,22 @@ public class Pokemon {
 	private String type2;
 	
 	public Pokemon() {
+		
 	}
+	
+	public Pokemon(String name, Integer height, Integer weight, String description, Integer catchRate, String sprite,
+			String type1, String type2) {
+		super();
+		this.name = name;
+		this.height = height;
+		this.weight = weight;
+		this.description = description;
+		this.catchRate = catchRate;
+		this.sprite = sprite;
+		this.type1 = type1;
+		this.type2 = type2;
+	}
+
 	public Integer getId() {
 		return id;
 	}
