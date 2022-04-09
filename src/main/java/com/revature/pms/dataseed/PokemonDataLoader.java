@@ -8,6 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,6 +32,11 @@ public class PokemonDataLoader implements CommandLineRunner {
 		String pokemonUrl = "https://pokeapi.co/api/v2/pokemon/{id}";
 		String speciesUrl = "https://pokeapi.co/api/v2/pokemon-species/{id}";
 		RestTemplate restTemplate = new RestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+        headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+        headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<String> entity = new HttpEntity<String>(headers);
+		
 		String name;
 		String height;
 		String weight;
@@ -36,11 +46,11 @@ public class PokemonDataLoader implements CommandLineRunner {
 		String description;
 		String catchRate;
 		for (int i = 1; i < 152; i++) {
-			String pokemon = restTemplate.getForObject(pokemonUrl, String.class, i);
-			String speciesJson = restTemplate.getForObject(speciesUrl,String.class, i);
+			ResponseEntity<String> pokemon = restTemplate.exchange(pokemonUrl, HttpMethod.GET, entity, String.class, i);
+			ResponseEntity<String> speciesJson = restTemplate.exchange(speciesUrl, HttpMethod.GET, entity, String.class, i);
 			JsonParser springParser = JsonParserFactory.getJsonParser();
-			Map<String, Object> map = springParser.parseMap(pokemon);
-			Map<String, Object> speciesMap = springParser.parseMap(speciesJson);
+			Map<String, Object> map = springParser.parseMap(pokemon.getBody());
+			Map<String, Object> speciesMap = springParser.parseMap(speciesJson.getBody());
 			List<Object> types = (List) map.get("types");
 			Map<String, Object> t1 = (Map) types.get(0);
 			Map<String, Object> t2 = new HashMap();
