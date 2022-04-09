@@ -6,7 +6,8 @@ target/
 
 
 ### to ignore the application.properties file ###
-application.properties
+src/main/resources/application.properties
+
 
 ### STS ###
 .apt_generated
