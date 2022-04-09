@@ -31,7 +31,6 @@ public class Pokemon {
 	private String type2;
 	
 	public Pokemon() {
-		
 	}
 	public Integer getId() {
 		return id;
@@ -87,4 +86,5 @@ public class Pokemon {
 	public void setType2(String type2) {
 		this.type2 = type2;
 	}
+	
 }

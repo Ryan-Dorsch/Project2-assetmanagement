@@ -10,17 +10,28 @@ import org.springframework.transaction.annotation.Transactional;
 import com.revature.pms.model.Pokemon;
 import com.revature.pms.repo.PokemonRepository;
 
-
 @Service("pokemonService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class PokemonServiceImpl implements PokemonService {
 
 	@Autowired
-	private PokemonRepository pokemonRepo;
-	
-	
-	public void addPokemon(Pokemon pokemon) {
-		pokemonRepo.save(pokemon);
-	}
+	PokemonRepository pokemonRepository;
 
+	@Override
+	public List<Pokemon> findAll() {
+		// TODO Auto-generated method stub
+		return pokemonRepository.findAll();
+	}
+	
+	@Override
+	public Pokemon findById(Integer id) {
+		// TODO Auto-generated method stub
+		return pokemonRepository.findById(id).get();
+	}
+	
+	@Override
+	public void addPokemon(Pokemon pokemon) {
+		// TODO Auto-generated method stub
+		pokemonRepository.save(pokemon);
+	}
 }
