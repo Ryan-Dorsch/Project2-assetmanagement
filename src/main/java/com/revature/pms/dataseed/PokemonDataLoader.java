@@ -16,16 +16,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.revature.pms.model.Pokemon;
+import com.revature.pms.repo.PokemonRepository;
+
 
 @Component
 public class PokemonDataLoader implements CommandLineRunner {
 	
-//	@Autowired
-//	UserRepository userRepository;
+	@Autowired
+	PokemonRepository pokemonRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
-		loadPokemonData();
+		if (pokemonRepository.count() == 0) {
+			loadPokemonData();
+		}
 	}
 	
 	private void loadPokemonData() {
@@ -38,13 +43,14 @@ public class PokemonDataLoader implements CommandLineRunner {
 		HttpEntity<String> entity = new HttpEntity<String>(headers);
 		
 		String name;
-		String height;
-		String weight;
+		Integer height;
+		Integer weight;
 		String type1;
 		String type2;
 		String spriteUrl;
-		String description;
-		String catchRate;
+		String description = "Not found :(";
+		Integer catchRate;
+		Pokemon p = new Pokemon();
 		for (int i = 1; i < 152; i++) {
 			ResponseEntity<String> pokemon = restTemplate.exchange(pokemonUrl, HttpMethod.GET, entity, String.class, i);
 			ResponseEntity<String> speciesJson = restTemplate.exchange(speciesUrl, HttpMethod.GET, entity, String.class, i);
@@ -61,17 +67,38 @@ public class PokemonDataLoader implements CommandLineRunner {
 				tMap.put("name", "none");
 				t2.put("type", tMap);
 			}
-			Map<String, Object> flavorTown = ((Map) ((List) speciesMap.get("flavor_text_entries")).get(0));
+			List<Object> flavorList = (List) speciesMap.get("flavor_text_entries");
+			Map<String, Object> flavorTown;
+			String version;
+			int versionIndex = 0;
+			for (int ind = 0; ind < flavorList.size(); ind++) {
+				flavorTown = ((Map) flavorList.get(ind));
+				version = ((Map) flavorTown.get("version")).get("name").toString();
+				if (version.equals("red")) {
+					description = flavorTown.get("flavor_text").toString();
+					description = description.replaceAll("(?:-)[\\n]", "-");
+					description = description.replaceAll("[\\n\\f]", " ");
+					versionIndex = ind;
+					break;
+				}
+			}
 			name = (String) map.get("name");
-			height = map.get("height").toString();
-			weight = map.get("weight").toString();
+			height = (Integer) map.get("height");
+			weight = (Integer) map.get("weight");
 			type1 = (String) ((Map) t1.get("type")).get("name");
 			type2 = (String) ((Map) t2.get("type")).get("name");
 			spriteUrl = (String) ((Map) map.get("sprites")).get("front_default");
-			catchRate = speciesMap.get("capture_rate").toString();
-			description = (String) flavorTown.get("flavor_text");
-			System.out.println("id: " + i + " name: " + name + " height: " + height + " type1: " + type1 + " type2: " + type2);
+			catchRate = (Integer) speciesMap.get("capture_rate");
+//			if (versionIndex!=0 && versionIndex!=1) {
+//			System.out.println("**************************************************************************************************************");
+//			System.out.println("id: " + i + " name: " + name + " height: " + height + " weight: " + weight + " type1: " + type1 + " type2: " + type2 +
+//					" catch_rate: " + catchRate +"\n\t" + "spriteUrl: " + spriteUrl + "\n\t" + "description:\n" + "\t\t"+ description + "\n\t" + "Version Index: " + versionIndex); 
+//			}
+			p = new Pokemon(name, height, weight, description, catchRate, spriteUrl, type1, type2);
+			pokemonRepository.save(p);
 		}
+		//System.out.println("**************************************************************************************************************");
+
 	}
 	
 }
