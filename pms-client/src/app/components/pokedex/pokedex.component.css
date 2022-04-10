@@ -5,6 +5,7 @@
 }
 
 body {
+    background-image: url("../../../assets/Collage-rainbow-fade.png");
     display: absolute;
     font-family: sans-serif;
     justify-content: center;
