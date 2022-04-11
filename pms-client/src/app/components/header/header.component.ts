@@ -31,6 +31,8 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     this.tokenStorageService.signOut();
+    window.location.replace("http://localhost:4200/#/");
+    window.location.reload;
   }
 
 }

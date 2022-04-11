@@ -1,17 +1,23 @@
 
 <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col mt-40">
-    <form
+  <div class='flex justify-center items-center flex-shrink-0 font-semibold  text-3xl cursor-pointer' >
+    <h1 class='italic pr-1'>
+      Trainer
+    </h1>
+    <span class="bg-red-600 text-white rounded-md pl-1.5 pr-1.5 "> sign-in </span>
+  </div>
+  <form
     *ngIf="!isLoggedIn"
     name="form"
     (ngSubmit)="f.form.valid && onSubmit()"
     #f="ngForm"
     novalidate
   >
-    <div>
-      <label for="username">Username</label>
+    <div class="mb-4">
+      <label class="block text-grey-darker text-sm font-bold mb-2" for="username">Username</label>
       <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" 
         type="text"
-        class="form-control"
         name="username"
         [(ngModel)]="form.username"
         required
@@ -26,10 +32,10 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="password">Password</label>
+      <label class="block text-grey-darker text-sm font-bold mb-2" for="password">Password</label>
       <input
+        class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
         type="password"
-        class="form-control"
         name="password"
         [(ngModel)]="form.password"
         required
@@ -48,7 +54,7 @@
       </div>
     </div>
     <div class="form-group">
-      <button class="btn btn-primary btn-block">
+      <button class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
         Login
       </button>
     </div>
