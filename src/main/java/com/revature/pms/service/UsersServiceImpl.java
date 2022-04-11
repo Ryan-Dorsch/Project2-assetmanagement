@@ -12,7 +12,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.revature.pms.model.Pokemon;
 import com.revature.pms.model.Users;
+import com.revature.pms.repo.PokemonRepository;
 import com.revature.pms.repo.UsersRepository;
 
 @Service(value = "usersService")
@@ -20,6 +22,9 @@ public class UsersServiceImpl implements  UserDetailsService, UsersService {
 
 	@Autowired
 	UsersRepository usersRepository;
+	
+	@Autowired
+	PokemonRepository pokemonRepository;
 
 	@Override
 	public List<Users> findAll() {
@@ -81,6 +86,18 @@ public class UsersServiceImpl implements  UserDetailsService, UsersService {
     public Users findOne(String username) {
         return usersRepository.findByUsername(username).get();
     }
+
+	@Override
+	public List<Pokemon> findAllPokemon() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addUserPokemon() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
 

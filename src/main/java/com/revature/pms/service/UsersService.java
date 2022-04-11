@@ -2,13 +2,16 @@ package com.revature.pms.service;
 
 import java.util.List;
 
+import com.revature.pms.model.Pokemon;
 import com.revature.pms.model.Users;
 
 
 public interface UsersService {
 	
 	public List<Users> findAll();
-
+	
+	public List<Pokemon> findAllPokemon();
+	
 	public Users findById(int id);
 
 	public void addUsers(Users users);
@@ -20,6 +23,7 @@ public interface UsersService {
 	public void deleteAll();
 	
 	Users findOne(String username);
-
+	
+	public void addUserPokemon();
 
 }
