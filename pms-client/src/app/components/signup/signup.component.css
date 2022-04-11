@@ -3,14 +3,17 @@
     padding: 0;
     list-style: none;
     text-decoration: none;
+    position: relative;
+    z-index: 1;
 }
 
 
 .form {
-    position: fixed;
+    position:fixed;
     right: -250px;
     width: 250px;
     height: 100%;
+    top: 100px;
     transition: all .5s ease; 
 }
 
@@ -30,7 +33,8 @@
 }
 
 .sidebar-background-image {
-    position: fixed;
+    top: 66px;
+    position:fixed;
     right: -250px;
     width: 250px;
     height: 100%;
@@ -39,9 +43,7 @@
     transition: all .5s ease;
 }
 
-#check {
-    /* display: none; */
-}
+
 
 label #btn,label #cancel {
     position:fixed;
