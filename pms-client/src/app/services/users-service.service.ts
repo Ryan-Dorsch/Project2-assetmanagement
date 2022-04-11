@@ -7,7 +7,7 @@ const baseUrl = 'http://localhost:8080/api/users';
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService{
+export class UsersService {
 
   constructor(private http: HttpClient) { }
   getAll(): Observable<Users[]> {
