@@ -18,6 +18,8 @@ public interface UsersService {
 	public void deleteUsers(int id);
 
 	public void deleteAll();
+	
+	Users findOne(String username);
 
 
 }
