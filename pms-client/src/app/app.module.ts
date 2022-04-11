@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { CatchpokemonComponent } from './components/catchpokemon/catchpokemon.component';
 
+import { authInterceptorProviders } from './helpers/auth.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +29,7 @@ import { CatchpokemonComponent } from './components/catchpokemon/catchpokemon.co
     HttpClientModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

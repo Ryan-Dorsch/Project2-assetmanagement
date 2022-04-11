@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'pms-header',
@@ -6,10 +7,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  private roles: string[] = [];
+  isLoggedIn = false;
+  // showAdminBoard = false;
+  // showModeratorBoard = false;
+  username?: string;
 
-  constructor() { }
+  constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+
+      // this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      // this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+
+      this.username = user.username;
+    }
+  }
+
+  logout(): void {
+    this.tokenStorageService.signOut();
+    window.location.replace("http://localhost:4200/#/");
+    window.location.reload;
   }
 
 }
