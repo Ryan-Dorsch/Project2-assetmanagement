@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+
+.form {
+    position: fixed;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    transition: all .5s ease; 
+}
+
+.form header {
+    font-size: 22px;
+    text-align: center;
+    line-height: 70px;
+}
+
+.form ul {
+    display: block;
+    height: 100%;
+    width: 60%;
+    line-height: 40px;
+    font-size: 15px;
+    padding-left: 40px;
+}
+
+.sidebar-background-image {
+    position: fixed;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-image: url("../../../assets/chibi-pokemon.jpg");
+    opacity: 13%;
+    transition: all .5s ease;
+}
+
+#check {
+    /* display: none; */
+}
+
+label #btn,label #cancel {
+    position:fixed;
+    cursor: pointer;
+}
+
+label #btn{
+    right: 40px;
+    top: 25px;
+    font-size: medium;
+    transition: all .5s;
+}
+
+label #cancel {
+    z-index: 1111;
+    right: -195px;
+    top: 17px;
+    font-size: 20px;
+    transition: all .5s ease;
+}
+
+#check:checked ~ .form, #check:checked ~ .sidebar-background-image {
+    right: 0;
+}
+
+#check:checked ~ label #btn{
+    right:250px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#check:checked ~ label #cancel{
+    right:195px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+section {
+    background-image: 2;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    transition: all .5s ease;
+}
