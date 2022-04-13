@@ -10,7 +10,7 @@
 
 .form {
     position:fixed;
-    right: -250px;
+    right: 0px;
     width: 250px;
     height: 100%;
     top: 100px;
@@ -35,7 +35,7 @@
 .sidebar-background-image {
     top: 66px;
     position:fixed;
-    right: -250px;
+    right: 0px;
     width: 250px;
     height: 100%;
     background-image: url("../../../assets/chibi-pokemon.jpg");
@@ -59,7 +59,7 @@ label #btn{
 
 label #cancel {
     z-index: 1111;
-    right: -195px;
+    right: 0px;
     top: 17px;
     font-size: 20px;
     transition: all .5s ease;

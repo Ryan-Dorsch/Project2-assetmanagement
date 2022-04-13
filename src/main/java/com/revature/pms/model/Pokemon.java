@@ -2,10 +2,18 @@ package com.revature.pms.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="Pokemon")
@@ -13,93 +21,86 @@ public class Pokemon {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	@Column(name="name")
-	private String name;
-	@Column(name="height")
-	private Integer height;
-	@Column(name="weight")
-	private Integer weight;
-	@Column(name="description")
-	private String description;
-	@Column(name="catch_rate")
-	private Integer catchRate;
-	@Column (name="sprite")
-	private String sprite;
-	@Column (name="type_1")
-	private String type1;
-	@Column (name="type_2")
-	private String type2;
+	@Column(name="nickname")
+	private String nickname;
+	@Column(name="location")
+	private Integer location;
+	@Column(name="pokeapi_id")
+	private Integer pokeapiId;
+	@ManyToOne(fetch=FetchType.LAZY, optional=false)
+	@JoinColumn(name="users_id", nullable=false)
+	@OnDelete(action=OnDeleteAction.CASCADE)
+	@JsonIgnore
+	private Users user;
+	
 	
 	public Pokemon() {
 		
 	}
 	
-	public Pokemon(String name, Integer height, Integer weight, String description, Integer catchRate, String sprite,
-			String type1, String type2) {
+	
+
+	public Pokemon(String nickname, Integer location, Integer pokeapiId, Users user) {
 		super();
-		this.name = name;
-		this.height = height;
-		this.weight = weight;
-		this.description = description;
-		this.catchRate = catchRate;
-		this.sprite = sprite;
-		this.type1 = type1;
-		this.type2 = type2;
+		this.nickname = nickname;
+		this.location = location;
+		this.pokeapiId = pokeapiId;
+		this.user = user;
 	}
+
+
 
 	public Integer getId() {
 		return id;
 	}
+
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+
+
+	public String getNickname() {
+		return nickname;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
-	public Integer getHeight() {
-		return height;
+
+
+	public Integer getLocation() {
+		return location;
 	}
-	public void setHeight(Integer height) {
-		this.height = height;
+
+
+	public void setLocation(Integer location) {
+		this.location = location;
 	}
-	public Integer getWeight() {
-		return weight;
+
+
+	public Integer getPokeapiId() {
+		return pokeapiId;
 	}
-	public void setWeight(Integer weight) {
-		this.weight = weight;
+
+
+	public void setPokeapiId(Integer pokeapiId) {
+		this.pokeapiId = pokeapiId;
 	}
-	public String getDescription() {
-		return description;
+
+
+	public Users getUser() {
+		return user;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+
+
+	public void setUser(Users user) {
+		this.user = user;
 	}
-	public Integer getCatchRate() {
-		return catchRate;
-	}
-	public void setCatchRate(Integer catchRate) {
-		this.catchRate = catchRate;
-	}
-	public String getSprite() {
-		return sprite;
-	}
-	public void setSprite(String sprite) {
-		this.sprite = sprite;
-	}
-	public String getType1() {
-		return type1;
-	}
-	public void setType1(String type1) {
-		this.type1 = type1;
-	}
-	public String getType2() {
-		return type2;
-	}
-	public void setType2(String type2) {
-		this.type2 = type2;
-	}
+	
+	
+
+
 	
 }

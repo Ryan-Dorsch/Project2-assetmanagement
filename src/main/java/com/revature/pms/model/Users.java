@@ -34,11 +34,6 @@ public class Users {
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "role_id", nullable = false)
 	private Role role;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_pokemon",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "pokemon_id"))
-    private Set<Pokemon> pokemon = new HashSet<>();
 	
 	public Users() {
 
@@ -78,18 +73,5 @@ public class Users {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-
-	public Set<Pokemon> getPokemon() {
-		return pokemon;
-	}
-
-	public void setPokemon(Set<Pokemon> pokemon) {
-		this.pokemon = pokemon;
-	}
-
-	
-
-	
-
 	
 }

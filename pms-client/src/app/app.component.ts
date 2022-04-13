@@ -8,10 +8,11 @@ import { TokenStorageService } from './services/token-storage.service';
 export class AppComponent {
   private roles: string[] = [];
   isLoggedIn = false;
-  showAdminBoard = false;
-  showModeratorBoard = false;
+  showUserIndex = false;
+  showManagerIndex = false;
+  showSignup = false;
   username?: string;
-  title = 'pms-client';
+  title = 'Pokehub';
 
   constructor(private tokenStorageService: TokenStorageService) { }
   ngOnInit(): void {
@@ -21,8 +22,8 @@ export class AppComponent {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.showUserIndex = this.roles.includes('ROLE_USER');
+      this.showManagerIndex = this.roles.includes('ROLE_MANAGER');
 
       this.username = user.username;
     }
@@ -31,6 +32,10 @@ export class AppComponent {
   logout(): void {
     this.tokenStorageService.signOut();
     window.location.reload();
+  }
+
+  setSignup(): void {
+    this.showSignup = !this.showSignup;
   }
 
 

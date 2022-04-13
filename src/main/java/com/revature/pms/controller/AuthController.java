@@ -65,7 +65,7 @@ public class AuthController {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        Users user = userService.findOne(loginRequest.getUsername());
+        Users user = userRepository.findByUsername(loginRequest.getUsername()).get();
         List<String> roles = authentication.getAuthorities().stream()
         		.map(item -> item.getAuthority())
         		.collect(Collectors.toList());
