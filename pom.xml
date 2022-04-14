@@ -61,6 +61,11 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.springdoc</groupId>
+		    <artifactId>springdoc-openapi-ui</artifactId>
+		    <version>1.6.4</version>
+		</dependency>
 	</dependencies>
 	<build>
 	  <plugins>
@@ -87,6 +92,13 @@
 	          </configuration>
 	        </execution>
 	      </executions>
+	    </plugin>
+	    <plugin>
+	    	<groupId>
+	    		org.sonarsource.scanner.maven:sonar-maven-plugin
+	    	</groupId>
+	    	<artifactId>sonar-maven-plugin</artifactId>
+	    	<version>3.9.1.2184</version>
 	    </plugin>
 	  </plugins>
 	</build>

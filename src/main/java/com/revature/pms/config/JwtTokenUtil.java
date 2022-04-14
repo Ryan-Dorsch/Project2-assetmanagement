@@ -72,6 +72,7 @@ public class JwtTokenUtil implements Serializable {
          
         return Jwts.builder()
                 .setSubject(user.getUsername())
+                .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY*1000))
                 .signWith(SignatureAlgorithm.HS512, SIGNING_KEY)
@@ -90,7 +91,7 @@ public class JwtTokenUtil implements Serializable {
         final Jws<Claims> claimsJws = jwtParser.parseClaimsJws(token);
 
         final Claims claims = claimsJws.getBody();
-
+        System.out.println("CLAIMS: " + claims);
         final Collection<? extends GrantedAuthority> authorities =
                 Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
                         .map(SimpleGrantedAuthority::new)

@@ -22,8 +22,8 @@ export class AppComponent {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
-      this.showUserIndex = this.roles.includes('ROLE_USER');
-      this.showManagerIndex = this.roles.includes('ROLE_MANAGER');
+      this.showUserIndex = this.roles.includes('USER');
+      this.showManagerIndex = this.roles.includes('MANAGER');
 
       this.username = user.username;
     }

@@ -9,8 +9,8 @@ import { PokeboxComponent } from './components/pokebox/pokebox.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'catchpokemon', component: CatchpokemonComponent },
-  { path: 'pokebox', component: PokeboxComponent},
+  { path: 'catch', component: CatchpokemonComponent },
+  { path: 'pokemon', component: PokeboxComponent},
   { path: '**', redirectTo: ''}
 
 ];

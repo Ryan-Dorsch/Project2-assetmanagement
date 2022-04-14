@@ -14,6 +14,8 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name="Pokemon")
@@ -25,13 +27,16 @@ public class Pokemon {
 	private String nickname;
 	@Column(name="location")
 	private Integer location;
-	@Column(name="pokeapi_id")
-	private Integer pokeapiId;
 	@ManyToOne(fetch=FetchType.LAZY, optional=false)
 	@JoinColumn(name="users_id", nullable=false)
 	@OnDelete(action=OnDeleteAction.CASCADE)
 	@JsonIgnore
 	private Users user;
+	@ManyToOne(fetch=FetchType.LAZY, optional=false)
+	@JoinColumn(name="pokemondata_id", nullable=false)
+	@OnDelete(action=OnDeleteAction.CASCADE)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private PokemonData data;
 	
 	
 	public Pokemon() {
@@ -40,12 +45,12 @@ public class Pokemon {
 	
 	
 
-	public Pokemon(String nickname, Integer location, Integer pokeapiId, Users user) {
+	public Pokemon(String nickname, Integer location, Integer pokeapiId, Users user, PokemonData data) {
 		super();
 		this.nickname = nickname;
 		this.location = location;
-		this.pokeapiId = pokeapiId;
 		this.user = user;
+		this.data = data;
 	}
 
 
@@ -79,17 +84,6 @@ public class Pokemon {
 		this.location = location;
 	}
 
-
-	public Integer getPokeapiId() {
-		return pokeapiId;
-	}
-
-
-	public void setPokeapiId(Integer pokeapiId) {
-		this.pokeapiId = pokeapiId;
-	}
-
-
 	public Users getUser() {
 		return user;
 	}
@@ -97,6 +91,18 @@ public class Pokemon {
 
 	public void setUser(Users user) {
 		this.user = user;
+	}
+
+
+
+	public PokemonData getData() {
+		return data;
+	}
+
+
+
+	public void setData(PokemonData data) {
+		this.data = data;
 	}
 	
 	

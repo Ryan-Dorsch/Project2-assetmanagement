@@ -12,6 +12,7 @@ import { CatchpokemonComponent } from './components/catchpokemon/catchpokemon.co
 
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { PokeboxComponent } from './components/pokebox/pokebox.component';
+import { PokemonSwapDirective } from './components/pokebox/pokemon-swap.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PokeboxComponent } from './components/pokebox/pokebox.component';
     LoginComponent,
     SignupComponent,
     CatchpokemonComponent,
-    PokeboxComponent
+    PokeboxComponent,
+    PokemonSwapDirective
   ],
   imports: [
     BrowserModule,

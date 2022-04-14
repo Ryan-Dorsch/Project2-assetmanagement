@@ -1,15 +1,28 @@
-<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col mt-40">
-    <div class='flex justify-center items-center flex-shrink-0 font-semibold  text-3xl cursor-pointer' >
-      <h1 class='italic pr-1'>
-        Trainer
-      </h1>
-      <span class="bg-red-600 text-white rounded-md pl-1.5 pr-1.5 "> Pokébox</span>
-    </div>
-    <div class="grid grid-cols-6 gap-4">
-        <div
-            
-        >
+<div class="flex justify-center items-center mt-28">
+  <div class="grid grid-cols-6 gap-0 font-semibold border-4 p-2 border-red-600 ">
+    <div
+      *ngFor="let location of locations; let boxIndex = index;"
+      appPokemonSwap
+      [elemPosition]="boxIndex"
+      [list]="locations"
+      (click)="setActiveIndex(boxIndex)"
+      [class.outline]="activeIndex==boxIndex"
+      (returnUpdatedList)="updateLocations($event)"
+      class="h-24 w-24 rounded-md outline-orange-500"
 
-        </div>
+    >
+      <div *ngIf="location!==0">
+        <img 
+          src={{location.sprite}}
+          draggable="true"
+        >
+      </div>
     </div>
+  </div>
 </div>
+<div class="flex justify-center items-center">
+  <button routerLink="/catch" class="mt-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+    Catch
+  </button> 
+</div>
+

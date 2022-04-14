@@ -26,7 +26,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.revature.pms.service.PokemonService;
 import com.revature.pms.exception.AppException;
 import com.revature.pms.model.Pokemon;
+import com.revature.pms.model.PokemonData;
 import com.revature.pms.payload.ApiResponse;
+import com.revature.pms.payload.UserPokemonResponse;
+import com.revature.pms.repo.PokemonDataRepository;
 import com.revature.pms.repo.PokemonRepository;
 import com.revature.pms.repo.UsersRepository;
 
@@ -41,15 +44,21 @@ public class PokemonController {
 	@Autowired
 	PokemonRepository pokeRepo;
 	@Autowired
+	PokemonDataRepository pokeDataRepo;
+	@Autowired
 	UsersRepository userRepo;
 	
 	@GetMapping("/users/{userId}/pokemon")
-	public ResponseEntity<List<Pokemon>> getAllPokemonByPokemonId(@PathVariable(value = "userId") Integer userId) {
+	public ResponseEntity<List<UserPokemonResponse>> getAllPokemonByPokemonId(@PathVariable(value = "userId") Integer userId) {
 		if (!userRepo.existsById(userId)) {
 		      throw new AppException("User not found with id = " + userId);
 	    }
 		List<Pokemon> pokemon = pokeRepo.findByUserId(userId);
-		return new ResponseEntity<>(pokemon, HttpStatus.OK);
+		List<UserPokemonResponse>  res = new ArrayList<>();
+		for (Pokemon p: pokemon) {
+			res.add(new UserPokemonResponse(p, p.getData()));
+		}
+		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
 	
 	@GetMapping("/pokemon/{id}")
@@ -64,20 +73,33 @@ public class PokemonController {
 	}
 	@PostMapping("/users/{userId}/pokemon")
 	public ResponseEntity<Pokemon> createPokemon(@PathVariable(value = "userId") Integer userId, @RequestBody Pokemon pokeRequest) {
+		
 		Pokemon pokemon = userRepo.findById(userId).map(user -> {
 			pokeRequest.setUser(user);
+			// find all user pokemon and add pokemon to first open location
+			List<Pokemon> pList = pokeRepo.findAllByOrderByLocation();
+			Integer location = 0;
+			for (Pokemon p: pList) {
+				if (p.getLocation() == location) {
+					location++;
+				}
+			}
+			pokeRequest.setLocation(location);
 			return pokeRepo.save(pokeRequest);
 		}).orElseThrow(() -> new AppException("User not found with id = " + userId));
-	    return new ResponseEntity<>(pokemon, HttpStatus.CREATED);
-	  }
+	    
+		return new ResponseEntity<>(pokemon, HttpStatus.CREATED);
+	 }
 	@PutMapping("/pokemon/{id}")
 	public ResponseEntity<Pokemon> update(@PathVariable("id") Integer id, @RequestBody Pokemon pokemonRequest) {
 		Pokemon pokemon = pokeRepo.findById(id)
 				.orElseThrow(() -> new AppException("PokemonId " + id + "not found"));
 		
 		// add field to update
+		pokemon.setLocation(pokemonRequest.getLocation());
+
 	    return new ResponseEntity<>(pokeRepo.save(pokemon), HttpStatus.OK);
-	  }
+	}
 	@DeleteMapping("/pokemon/{id}")
 	public ResponseEntity<HttpStatus> deletePokemon(@PathVariable("id") Integer id) {
 		pokeRepo.deleteById(id);
@@ -93,11 +115,17 @@ public class PokemonController {
 	}
 	
 	
-//	@GetMapping
-//	public List<Pokemon> findAll() {
+//	@GetMapping("/pokemon/data/{name}")
+//	public ResponseEntity<PokemonData> getPokemonData(@PathVariable(value= "name") String name){
 //		// TODO Auto-generated method stub
-//		return pokemonService.findAll();
+//		return new ResponseEntity<>(pokeDataRepo.findByName(name).get(), HttpStatus.OK);
 //	}
+	
+	@GetMapping("/pokemon/data/{id}")
+	public ResponseEntity<PokemonData> getPokemonData(@PathVariable(value= "id") Integer id){
+		// TODO Auto-generated method stub
+		return new ResponseEntity<>(pokeDataRepo.findById(id).get(), HttpStatus.OK);
+	}
 //
 //	@GetMapping("/{id}")
 //	public Pokemon findById(@PathVariable int id) {
